@@ -6,6 +6,13 @@ This public repository distributes the official beta plugin for Codex and Claude
 OAuth MCP server remains operated at `https://valha.link/mcp`; this repository contains no Valha
 server code, credentials, or customer data.
 
+## Develop
+
+This repository is the source of truth for the production plugin. Edit its manifests and skills
+here, then run `bun scripts/validate-plugin.ts` and `bun test tests`. Check that changed skill
+guidance matches the deployed MCP tools before release. GitHub updates, Codex installations,
+ChatGPT personal imports, and OpenAI Platform submissions are separate steps.
+
 ## Install
 
 ```bash
