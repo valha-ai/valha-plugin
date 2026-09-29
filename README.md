@@ -9,19 +9,24 @@ server code, credentials, or customer data.
 ## Develop
 
 This repository is the source of truth for the production plugin. Edit its manifests and skills
-here, then run `bun scripts/validate-plugin.ts` and `bun test tests`. Check that changed skill
+here, then run `bun test tests`. Check that changed skill
 guidance matches the deployed MCP tools before release. GitHub updates, Codex installations,
 ChatGPT personal imports, and OpenAI Platform submissions are separate steps.
 
-For local Codex testing, run `bun scripts/prepare-local-plugin.ts`. It creates an ignored
-marketplace under `.tmp/valha-local-marketplace` with the same three skills and a local MCP
-connection. Register that generated directory as a separate marketplace, install
-`valha-local@valha-local`, and start a new task. After changing the source plugin, regenerate
-the local package, remove and reinstall `valha-local@valha-local`, then start a new task.
-Keep `valha@valha` disabled in the development project so
-test requests cannot select the production connection.
+For local Codex testing, use the tracked `local-marketplace/` directory. It contains
+`valha-local@valha-local` with the same three skills, a blue icon, and a connection to
+`https://localhost:4949/mcp`. Register it once with
+`codex plugin marketplace add ./local-marketplace`, then install with
+`codex plugin add valha-local@valha-local`. Edit the two plugin packages directly; the tests
+check that their skill guidance stays equal while the MCP URLs differ. After editing the local
+package, remove and add `valha-local@valha-local` again, then start a new task. Select the
+intended plugin explicitly when both Valha and Valha Local are available.
 
 ## Install
+
+These beta commands install the production package from the GitHub marketplace. A future
+universal Plugins Directory listing will be a separate installation and will not update this
+marketplace copy automatically. The development package is not listed in this root marketplace.
 
 ```bash
 codex plugin marketplace add Alex-Levacher/valha-plugin

@@ -1,0 +1,11 @@
+interface:
+  display_name: "Use Valha Knowledge"
+  short_description: "Find and apply trusted work from Valha pages"
+  default_prompt: "Use $use-valha-knowledge to find relevant Valha knowledge for this task."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "valha"
+      description: "Valha page publishing and knowledge MCP"
+      transport: "streamable_http"
+      url: "https://localhost:4949/mcp"

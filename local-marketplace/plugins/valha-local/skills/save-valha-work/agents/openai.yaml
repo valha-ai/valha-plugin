@@ -1,0 +1,11 @@
+interface:
+  display_name: "Save Valha Work"
+  short_description: "Turn completed work into a deliberate Valha page"
+  default_prompt: "Use $save-valha-work to save this work as a Valha page."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "valha"
+      description: "Valha page publishing and knowledge MCP"
+      transport: "streamable_http"
+      url: "https://localhost:4949/mcp"

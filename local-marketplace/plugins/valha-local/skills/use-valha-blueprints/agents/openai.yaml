@@ -1,0 +1,11 @@
+interface:
+  display_name: "Use Valha Blueprints"
+  short_description: "Find a Valha Blueprint when you ask for one"
+  default_prompt: "Use $use-valha-blueprints to find and inspect a Valha Blueprint for this goal. Apply it only after my selection."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "valha"
+      description: "Valha Blueprint, page publishing, and knowledge MCP"
+      transport: "streamable_http"
+      url: "https://localhost:4949/mcp"

@@ -1,5 +1,5 @@
 {
-  "name": "valha",
+  "name": "valha-local",
   "version": "0.3.0",
   "description": "Turn useful AI work into readable Valha pages, reuse trusted knowledge, and find Blueprints when requested.",
   "author": {
@@ -19,7 +19,7 @@
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
-    "displayName": "Valha",
+    "displayName": "Valha Local",
     "logo": "./assets/logo.png",
     "composerIcon": "./assets/logo.png",
     "shortDescription": "Pages people actually read",
@@ -27,7 +27,7 @@
     "developerName": "Valha",
     "category": "Productivity",
     "capabilities": ["Read", "Write"],
-    "websiteURL": "https://valha.link",
+    "websiteURL": "https://localhost:4949",
     "defaultPrompt": [
       "Save this work as a Valha page people will actually read.",
       "Find relevant Valha knowledge for this task.",
