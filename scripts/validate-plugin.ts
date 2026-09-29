@@ -17,6 +17,7 @@ const pluginFiles = [
   "skills/use-valha-knowledge/agents/openai.yaml",
 ];
 const rootFiles = [
+  ".gitignore",
   ".agents/plugins/marketplace.json",
   ".claude-plugin/marketplace.json",
   "CHANGELOG.md",
@@ -24,12 +25,17 @@ const rootFiles = [
   "README.md",
   "SECURITY.md",
 ];
-const supportFiles = ["AGENTS.md", "scripts/validate-plugin.ts", "tests/validate-plugin.test.ts"];
+const supportFiles = [
+  "AGENTS.md",
+  "scripts/prepare-local-plugin.ts",
+  "scripts/validate-plugin.ts",
+  "tests/validate-plugin.test.ts",
+];
 
 function files(directory: string, prefix = ""): string[] {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
     const relativePath = join(prefix, entry.name);
-    if (relativePath === ".git") return [];
+    if (relativePath === ".git" || relativePath === ".tmp") return [];
     if (entry.isDirectory()) return files(join(directory, entry.name), relativePath);
     if (!entry.isFile()) throw new Error(`unsupported file: ${relativePath}`);
     return [relativePath];

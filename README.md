@@ -13,6 +13,14 @@ here, then run `bun scripts/validate-plugin.ts` and `bun test tests`. Check that
 guidance matches the deployed MCP tools before release. GitHub updates, Codex installations,
 ChatGPT personal imports, and OpenAI Platform submissions are separate steps.
 
+For local Codex testing, run `bun scripts/prepare-local-plugin.ts`. It creates an ignored
+marketplace under `.tmp/valha-local-marketplace` with the same three skills and a local MCP
+connection. Register that generated directory as a separate marketplace, install
+`valha-local@valha-local`, and start a new task. After changing the source plugin, regenerate
+the local package, remove and reinstall `valha-local@valha-local`, then start a new task.
+Keep `valha@valha` disabled in the development project so
+test requests cannot select the production connection.
+
 ## Install
 
 ```bash
