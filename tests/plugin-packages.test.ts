@@ -8,18 +8,21 @@ const skills = ["save-valha-work", "use-valha-blueprints", "use-valha-knowledge"
 const read = (root: URL, path: string) => readFileSync(new URL(path, root), "utf8");
 const json = (root: URL, path: string) => JSON.parse(read(root, path));
 
-test("production and local packages use their own MCP endpoints", () => {
-  expect(json(production, ".mcp.json").mcpServers.valha.url).toBe("https://valha.link/mcp");
-  expect(json(local, ".mcp.json").mcpServers.valha.url).toBe("https://localhost:4949/mcp");
+test("production and local packages use distinct MCP names and endpoints", () => {
+  const productionServers = json(production, ".mcp.json").mcpServers;
+  const localServers = json(local, ".mcp.json").mcpServers;
+  expect(Object.keys(productionServers)).toEqual(["valha"]);
+  expect(Object.keys(localServers)).toEqual(["valha-local"]);
+  expect(productionServers.valha.url).toBe("https://valha.link/mcp");
+  expect(localServers["valha-local"].url).toBe("https://localhost:4949/mcp");
 
   for (const skill of skills) {
     const path = `skills/${skill}/`;
     expect(read(local, `${path}SKILL.md`)).toBe(read(production, `${path}SKILL.md`));
     expect(read(local, `${path}agents/openai.yaml`)).toBe(
-      read(production, `${path}agents/openai.yaml`).replace(
-        "https://valha.link/mcp",
-        "https://localhost:4949/mcp",
-      ),
+      read(production, `${path}agents/openai.yaml`)
+        .replace('value: "valha"', 'value: "valha-local"')
+        .replace("https://valha.link/mcp", "https://localhost:4949/mcp"),
     );
   }
 });

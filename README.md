@@ -14,11 +14,11 @@ guidance matches the deployed MCP tools before release. GitHub updates, Codex in
 ChatGPT personal imports, and OpenAI Platform submissions are separate steps.
 
 For local Codex testing, use the tracked `local-marketplace/` directory. It contains
-`valha-local@valha-local` with the same three skills, a blue icon, and a connection to
+`valha-local@valha-local` with the same three skills, a blue icon, and a `valha-local` MCP connection to
 `https://localhost:4949/mcp`. Register it once with
 `codex plugin marketplace add ./local-marketplace`, then install with
 `codex plugin add valha-local@valha-local`. Edit the two plugin packages directly; the tests
-check that their skill guidance stays equal while the MCP URLs differ. After editing the local
+check that their skill guidance stays equal while the MCP names and URLs differ. After editing the local
 package, remove and add `valha-local@valha-local` again, then start a new task. Select the
 intended plugin explicitly when both Valha and Valha Local are available.
 
