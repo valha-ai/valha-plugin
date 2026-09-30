@@ -1,10 +1,20 @@
 {
   "name": "valha",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Turn useful AI work into readable Valha pages, reuse trusted knowledge, and find Blueprints when requested.",
   "author": {
-    "name": "Valha"
+    "name": "Valha",
+    "url": "https://valha.link"
   },
   "homepage": "https://valha.link",
-  "repository": "https://github.com/Alex-Levacher/valha-plugin"
+  "repository": "https://github.com/Alex-Levacher/valha-plugin",
+  "license": "LicenseRef-Valha",
+  "keywords": [
+    "ai-native documents",
+    "blueprints",
+    "reusable methods",
+    "knowledge",
+    "mcp",
+    "publishing"
+  ]
 }

@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "valha-local": {
-      "type": "http",
-      "url": "https://localhost:4949/mcp"
-    }
-  }
-}

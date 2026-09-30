@@ -2,63 +2,59 @@ import { expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
 
 const production = new URL("../plugins/valha/", import.meta.url);
-const local = new URL("../local-marketplace/plugins/valha-local/", import.meta.url);
 const skills = ["save-valha-work", "use-valha-blueprints", "use-valha-knowledge"];
+const repository = new URL("../", import.meta.url);
 
 const read = (root: URL, path: string) => readFileSync(new URL(path, root), "utf8");
 const json = (root: URL, path: string) => JSON.parse(read(root, path));
 
-test("production and local packages use distinct MCP names and endpoints", () => {
-  const productionServers = json(production, ".mcp.json").mcpServers;
-  const localServers = json(local, ".mcp.json").mcpServers;
-  expect(Object.keys(productionServers)).toEqual(["valha"]);
-  expect(Object.keys(localServers)).toEqual(["valha-local"]);
-  expect(productionServers.valha.url).toBe("https://valha.link/mcp");
-  expect(localServers["valha-local"].url).toBe("https://localhost:4949/mcp");
-
+test("the package connects only to the production MCP server", () => {
+  expect(json(production, ".mcp.json").mcpServers).toEqual({
+    valha: { type: "http", url: "https://valha.link/mcp" },
+  });
   for (const skill of skills) {
-    const path = `skills/${skill}/`;
-    expect(read(local, `${path}SKILL.md`)).toBe(read(production, `${path}SKILL.md`));
-    expect(read(local, `${path}agents/openai.yaml`)).toBe(
-      read(production, `${path}agents/openai.yaml`)
-        .replace('value: "valha"', 'value: "valha-local"')
-        .replace("https://valha.link/mcp", "https://localhost:4949/mcp"),
-    );
+    const dependency = read(production, `skills/${skill}/agents/openai.yaml`);
+    expect(dependency).toContain('value: "valha"');
+    expect(dependency).toContain("https://valha.link/mcp");
   }
 });
 
-test("both plugins have distinct identities and icons", () => {
-  const productionManifest = json(production, ".codex-plugin/plugin.json");
-  const localManifest = json(local, ".codex-plugin/plugin.json");
-  const productionMarketplace = json(
-    new URL("../", import.meta.url),
-    ".agents/plugins/marketplace.json",
-  );
-  const localMarketplace = json(
-    new URL("../local-marketplace/", import.meta.url),
-    ".agents/plugins/marketplace.json",
-  );
+test("the Codex manifest and marketplace identify the plugin and its icon", () => {
+  const manifest = json(production, ".codex-plugin/plugin.json");
+  const marketplace = json(repository, ".agents/plugins/marketplace.json");
 
-  expect(productionManifest.name).toBe("valha");
-  expect(localManifest.name).toBe("valha-local");
-  expect(localManifest.version).toBe(productionManifest.version);
-  expect(localManifest.interface.displayName).toBe("Valha Local");
-  expect(productionMarketplace.plugins).toHaveLength(1);
-  expect(productionMarketplace.plugins[0].name).toBe("valha");
-  expect(localMarketplace.name).toBe("valha-local");
-  expect(localMarketplace.plugins[0].source.path).toBe("./plugins/valha-local");
+  expect(manifest.name).toBe("valha");
+  expect(marketplace.plugins).toHaveLength(1);
+  expect(marketplace.plugins[0].name).toBe("valha");
+  expect(marketplace.plugins[0].source.path).toBe("./plugins/valha");
+  expect(manifest.interface.logo).toBe("./assets/logo.png");
+  expect(manifest.interface.composerIcon).toBe("./assets/logo.png");
+  expect(readFileSync(new URL(manifest.interface.logo, production)).length).toBeGreaterThan(0);
+});
 
-  for (const [root, manifest] of [
-    [production, productionManifest],
-    [local, localManifest],
-  ] as const) {
-    expect(manifest.interface.logo).toBe("./assets/logo.png");
-    expect(manifest.interface.composerIcon).toBe("./assets/logo.png");
-    expect(readFileSync(new URL(manifest.interface.logo, root)).length).toBeGreaterThan(0);
+test("the Claude manifest matches its marketplace entry and the Codex manifest", () => {
+  const claude = json(production, ".claude-plugin/plugin.json");
+  const codex = json(production, ".codex-plugin/plugin.json");
+  const marketplace = json(repository, ".claude-plugin/marketplace.json");
+
+  expect(claude.name).toBe("valha");
+  expect(claude.version).toBe(codex.version);
+  expect(claude.description).toBe(codex.description);
+  expect(marketplace.name).toBe("valha");
+  expect(marketplace.plugins).toHaveLength(1);
+  expect(marketplace.plugins[0].name).toBe("valha");
+  // plugin.json is the only version source; a marketplace copy would drift.
+  expect(marketplace.plugins[0].version).toBeUndefined();
+  expect(marketplace.plugins[0].description).toBe(claude.description);
+  expect(new URL(`${marketplace.plugins[0].source}/`, repository).href).toBe(production.href);
+});
+
+test("skills tell the assistant to stop when Valha is not connected", () => {
+  for (const skill of skills) {
+    expect(read(production, `skills/${skill}/SKILL.md`)).toContain(
+      "If Valha tools are unavailable or return an authentication error, stop",
+    );
   }
-  expect(readFileSync(new URL("assets/logo.png", local))).not.toEqual(
-    readFileSync(new URL("assets/logo.png", production)),
-  );
 });
 
 test("released Blueprint and save guidance remains deliberate", () => {

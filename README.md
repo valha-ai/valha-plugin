@@ -13,20 +13,14 @@ here, then run `bun test tests`. Check that changed skill
 guidance matches the deployed MCP tools before release. GitHub updates, Codex installations,
 ChatGPT personal imports, and OpenAI Platform submissions are separate steps.
 
-For local Codex testing, use the tracked `local-marketplace/` directory. It contains
-`valha-local@valha-local` with the same three skills, a blue icon, and a `valha-local` MCP connection to
-`https://localhost:4949/mcp`. Register it once with
-`codex plugin marketplace add ./local-marketplace`, then install with
-`codex plugin add valha-local@valha-local`. Edit the two plugin packages directly; the tests
-check that their skill guidance stays equal while the MCP names and URLs differ. After editing the local
-package, remove and add `valha-local@valha-local` again, then start a new task. Select the
-intended plugin explicitly when both Valha and Valha Local are available.
+To try an edit in Claude Code without installing it, load the package directly with
+`claude --plugin-dir ./plugins/valha`.
 
 ## Install
 
 These beta commands install the production package from the GitHub marketplace. A future
 universal Plugins Directory listing will be a separate installation and will not update this
-marketplace copy automatically. The development package is not listed in this root marketplace.
+marketplace copy automatically.
 
 ```bash
 codex plugin marketplace add Alex-Levacher/valha-plugin
@@ -38,7 +32,10 @@ claude plugin marketplace add Alex-Levacher/valha-plugin
 claude plugin install valha@valha
 ```
 
-Authenticate the Valha MCP server when prompted, then start a new task or session so the skills load.
+Codex asks you to authenticate the Valha MCP server at installation; start a new task so the
+skills load. Claude Code does not prompt: in a new session, run `/mcp`, select `valha`, and choose
+**Authenticate**. In the Claude desktop app, if the sign-in page does not open, add
+`https://valha.link/mcp` as a custom connector under **Settings → Connectors** instead.
 ChatGPT uses `import_illustration_file` for attached files; Codex and Claude Code use
 `create_illustration_upload` followed by `finalize_illustration_upload`.
 

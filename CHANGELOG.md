@@ -2,6 +2,17 @@
 
 All notable public beta plugin contract changes are documented here.
 
+## 0.4.0 (2026-09-30)
+
+- Skills stop and ask the user to connect or re-authenticate Valha when its tools are unavailable, instead of continuing without them.
+- A requested folder is now created as a parent page with child pages; existing pages move only through an approved `reorganize_page_hierarchy` batch.
+- Continuations of an existing artifact use `get_continuation_page` and `save_continuation_page`.
+- Skill descriptions include French trigger examples.
+- Completed the Claude Code manifest metadata, kept the version only in `plugin.json`, and tested that the Claude and Codex manifests stay consistent.
+- Declared the `LicenseRef-Valha` license in both manifests and the privacy policy and terms URLs in the Codex manifest.
+- This repository now ships only the production package.
+- Documented Claude Code sign-in (`/mcp`, or a custom connector in the desktop app) and plugin updates.
+
 ## 0.3.0 (2026-09-25)
 
 - Made Blueprint discovery user-initiated in plugin guidance and metadata.

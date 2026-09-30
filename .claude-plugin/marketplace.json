@@ -1,18 +1,18 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "valha",
-  "version": "0.3.0",
   "description": "Official Valha plugins for AI-assisted work.",
   "owner": {
-    "name": "Valha"
+    "name": "Valha",
+    "url": "https://valha.link"
   },
   "plugins": [
     {
       "name": "valha",
-      "version": "0.3.0",
-      "description": "Publish durable AI work pages and reuse trusted Valha knowledge.",
+      "description": "Turn useful AI work into readable Valha pages, reuse trusted knowledge, and find Blueprints when requested.",
       "author": {
-        "name": "Valha"
+        "name": "Valha",
+        "url": "https://valha.link"
       },
       "source": "./plugins/valha",
       "category": "productivity"

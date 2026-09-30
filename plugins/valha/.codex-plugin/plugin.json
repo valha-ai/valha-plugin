@@ -1,6 +1,6 @@
 {
   "name": "valha",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Turn useful AI work into readable Valha pages, reuse trusted knowledge, and find Blueprints when requested.",
   "author": {
     "name": "Valha",
@@ -16,6 +16,7 @@
     "mcp",
     "publishing"
   ],
+  "license": "LicenseRef-Valha",
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
@@ -32,6 +33,8 @@
       "Save this work as a Valha page people will actually read.",
       "Find relevant Valha knowledge for this task.",
       "Find a suitable Valha Blueprint for this task."
-    ]
+    ],
+    "privacyPolicyURL": "https://valha.link/privacy",
+    "termsOfServiceURL": "https://valha.link/terms"
   }
 }

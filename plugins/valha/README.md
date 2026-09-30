@@ -24,8 +24,12 @@ claude plugin marketplace add Alex-Levacher/valha-plugin
 claude plugin install valha@valha
 ```
 
-Authenticate the Valha MCP server when prompted, then start a new session so Claude Code loads the
-plugin skills.
+Claude Code does not ask you to sign in at installation. In a new session, open the MCP server list
+with `/mcp`, select `valha`, and choose **Authenticate** to complete the Valha sign-in in your browser.
+The skills load in any session started after installation. In the Claude desktop app, if the
+sign-in page does not open, add `https://valha.link/mcp` as a custom connector under
+**Settings → Connectors** instead; its sign-in runs in the browser and the connector is also
+available to Code sessions.
 
 ## ChatGPT developer beta
 
@@ -86,11 +90,22 @@ Beta releases use `0.x` versions. Upgrade the marketplace before starting a new 
 codex plugin marketplace upgrade valha
 ```
 
-Claude Code users can update the installed marketplace and plugin through the plugin manager. See
-[CHANGELOG.md](../../CHANGELOG.md) for contract changes.
+In Claude Code, third-party marketplaces do not update automatically. Refresh the marketplace,
+then update the plugin:
+
+```bash
+claude plugin marketplace update valha
+claude plugin update valha@valha
+```
+
+See the
+[CHANGELOG](https://github.com/Alex-Levacher/valha-plugin/blob/main/CHANGELOG.md) for contract
+changes.
 
 ## Security and terms
 
-Report vulnerabilities privately as described in [SECURITY.md](../../SECURITY.md). Valha's
+Report vulnerabilities privately as described in
+[SECURITY.md](https://github.com/Alex-Levacher/valha-plugin/blob/main/SECURITY.md). Valha's
 [Privacy Policy](https://valha.link/privacy) and [Terms](https://valha.link/terms) apply to the hosted
-service. This distribution package is not open source; see [LICENSE](../../LICENSE).
+service. This distribution package is not open source; see the
+[LICENSE](https://github.com/Alex-Levacher/valha-plugin/blob/main/LICENSE).

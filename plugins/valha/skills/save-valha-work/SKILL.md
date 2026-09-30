@@ -1,21 +1,17 @@
 ---
 name: save-valha-work
-description: Turn completed AI-assisted work into a deliberate Valha page, or safely edit an existing Valha page. Use when the user asks to publish, save, share, preserve, update, rename, or add material to work in Valha.
+description: Turns completed AI-assisted work into a deliberate Valha page, groups pages under a parent page, or safely edits an existing Valha page. Use when the user asks to save, publish, share, preserve, update, rename, organize, or add material to work in Valha, for example "sauve ça dans Valha", "publie sur Valha", "crée un dossier Valha", or "mets à jour la page Valha". Not for read-only lookups in Valha; use use-valha-knowledge for those.
 ---
 
 # Save Valha Work
 
 Save the selected outcome, not the raw conversation. Preserve the user's judgment over what becomes durable and omit private reasoning, discarded context, credentials, and unrelated material.
 
-For illustrations, ChatGPT uses `import_illustration_file` with an attached file. Codex and Claude
-Code use `create_illustration_upload` followed by `finalize_illustration_upload`. Never publish a
-page or expose private content without an explicit user request.
-
 ## Workflow
 
 Do not search Blueprints as a prerequisite to page authoring. Search only when the user explicitly requests a Blueprint or reusable Valha method. An accepted Blueprint does not authorize page creation or publication; preserve the user's requested scope.
 
-1. Call `get_context` to confirm the connected account and active workspace.
+1. Call `get_context` to confirm the connected account and active workspace. If Valha tools are unavailable or return an authentication error, stop: tell the user that Valha must be connected or re-authenticated in this host's connector or MCP settings, then retry. Never simulate a save, and never substitute local files for Valha.
 2. If the user named a workspace, verify it against `get_context.workspaces`. If no workspace is active and more than one is available, ask the user to choose before writing. Use `list_workspaces` only when a fresh list is needed later.
 3. Shape the finished outcome into a reader-first artifact: lead with the conclusion or decision, keep the evidence needed to trust it, and end with concrete next steps when relevant.
 4. Before the first page-content create or edit in this task, call `get_authoring_help` with `topic=guidelines`. Reuse the result for later edits in the same task; reload after a contract error. A title-only rename, visibility change, or share-link change does not need authoring help.
@@ -26,7 +22,10 @@ Do not search Blueprints as a prerequisite to page authoring. Search only when t
 
 ## Create a page
 
-- Save new work directly: no duplicate search or full workspace scan is required. Similar content may coexist. Use a parent only when the user specifies one; resolve it if needed. Otherwise omit `parentPageId` and save at the workspace root without creating categories or dossiers.
+- Save new work directly: no duplicate search or full workspace scan is required. Similar content may coexist. Omit `parentPageId` and save at the workspace root unless the user names a parent page (resolve it if needed) or asks for a folder, dossier, or section.
+- Valha has no separate folder object: a folder is a parent page. For a folder request, create a short parent page titled for the topic, then create each child page with that page's id as `parentPageId`. Do not invent a hierarchy the user did not ask for.
+- To move existing pages under a parent, present the exact moves, and only after explicit approval call `reorganize_page_hierarchy` with each page's latest `expectedRev`.
+- To add an illustration, ChatGPT uses `import_illustration_file` with an attached file; Codex and Claude Code use `create_illustration_upload` followed by `finalize_illustration_upload`.
 - A `create_page` timeout or lost response does not prove failure. Before retrying, inspect recent pages with `list_pages` and verify plausible matches with `get_page`. Reuse a confirmed successful creation. If the outcome remains uncertain, report it and ask before risking another creation; this write is not idempotent.
 - `create_page` saves a private page: workspace members only, no public URL. That is the default even when the user's request uses the word "publish"; treat the request as authorization to save, not to make the page public.
 - Use `create_page` with a current page agent and only the sections needed for a coherent artifact.
@@ -44,6 +43,7 @@ Do not search Blueprints as a prerequisite to page authoring. Search only when t
 - Pass the latest `expectedRev`. Never change the page id, slug, or title through `update_page`.
 - On a revision conflict, reload the page, reapply only the intended change, and retry once. Report a repeated conflict instead of overwriting newer work.
 - Update the page agent when the content meaning or handoff changes.
+- To write a continuation back into an existing artifact, load it with `get_continuation_page` and save only its authored `page` with `save_continuation_page`, choosing `agentUpdate` (`replace` for changed meaning or handoff, `confirm-current` for visual-only changes, `preserve` when unsure). On conflict, reload with `get_continuation_page`, merge, and retry once.
 
 ## Persistent Canvas state
 
