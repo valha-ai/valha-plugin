@@ -2,6 +2,10 @@
 
 All notable public beta plugin contract changes are documented here.
 
+## Unreleased
+
+- Unified the MCP dependency description in every skill's Codex metadata.
+
 ## 0.4.0 (2026-09-30)
 
 - Skills stop and ask the user to connect or re-authenticate Valha when its tools are unavailable, instead of continuing without them.
