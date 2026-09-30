@@ -1,12 +1,17 @@
 {
   "name": "valha",
-  "version": "0.4.1",
+  "displayName": "Valha",
+  "version": "0.4.2",
   "description": "Turn useful AI work into readable Valha pages, reuse trusted knowledge, and find Blueprints when requested.",
   "author": {
     "name": "Valha",
     "url": "https://valha.link"
   },
   "homepage": "https://valha.link",
+  "documentationUrl": "https://valha.link/connect",
+  "supportUrl": "https://valha.link/support",
+  "privacyPolicyUrl": "https://valha.link/privacy",
+  "termsOfServiceUrl": "https://valha.link/terms",
   "repository": "https://github.com/Alex-Levacher/valha-plugin",
   "license": "LicenseRef-Valha",
   "keywords": [
@@ -16,5 +21,6 @@
     "knowledge",
     "mcp",
     "publishing"
-  ]
+  ],
+  "icon": "./assets/logo.png"
 }

@@ -2,6 +2,10 @@
 
 All notable public beta plugin contract changes are documented here.
 
+## 0.4.2 (2026-10-01)
+
+- Added Claude directory listing metadata: display name, icon, and documentation, support, privacy policy, and terms URLs.
+
 ## 0.4.1 (2026-09-30)
 
 - Unified the MCP dependency description in every skill's Codex metadata.
