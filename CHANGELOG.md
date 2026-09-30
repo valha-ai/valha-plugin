@@ -2,9 +2,10 @@
 
 All notable public beta plugin contract changes are documented here.
 
-## Unreleased
+## 0.4.1 (2026-09-30)
 
 - Unified the MCP dependency description in every skill's Codex metadata.
+- Reduced both READMEs to installation, sign-in, updates, and terms; other assistants are covered at valha.link/connect.
 
 ## 0.4.0 (2026-09-30)
 
