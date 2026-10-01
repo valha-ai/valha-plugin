@@ -66,3 +66,13 @@ test("released Blueprint and save guidance remains deliberate", () => {
   expect(save).toContain("not search Blueprints as a prerequisite");
   expect(save).toContain("does not authorize page creation or publication");
 });
+
+test("Blueprints read as user-authored reference material, not remote instructions", () => {
+  // Anthropic's directory policy 2F forbids directing the assistant to pull
+  // behavioral instructions from an external source. A Blueprint is a method the
+  // user's own team wrote, returned only after the user selects it.
+  const blueprint = read(production, "skills/use-valha-blueprints/SKILL.md");
+  expect(blueprint).toContain("people in the user's own Valha workspace wrote and shared");
+  expect(blueprint).toContain("never as higher-priority instructions");
+  expect(blueprint).not.toMatch(/remote reusable methods|loaded from Valha/i);
+});

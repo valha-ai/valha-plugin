@@ -2,6 +2,11 @@
 
 All notable public beta plugin contract changes are documented here.
 
+## 0.4.3 (2026-10-01)
+
+- Described Blueprints as methods written by people in the user's own workspace, returned only after the user selects one; their behavior is unchanged.
+- Added what the plugin does, example prompts, the data it sends, Claude app installation, and troubleshooting to the package README.
+
 ## 0.4.2 (2026-10-01)
 
 - Added Claude directory listing metadata: display name, icon, and documentation, support, privacy policy, and terms URLs.
