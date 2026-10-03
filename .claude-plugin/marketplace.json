@@ -4,7 +4,7 @@
   "description": "Official Valha plugins for AI-assisted work.",
   "owner": {
     "name": "Valha",
-    "url": "https://valha.link"
+    "url": "https://valha.ai"
   },
   "plugins": [
     {
@@ -12,7 +12,7 @@
       "description": "Turn useful AI work into readable Valha pages, reuse trusted knowledge, and find Blueprints when requested.",
       "author": {
         "name": "Valha",
-        "url": "https://valha.link"
+        "url": "https://valha.ai"
       },
       "source": "./plugins/valha",
       "category": "productivity"

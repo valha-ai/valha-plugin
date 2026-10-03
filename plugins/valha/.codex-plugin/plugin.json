@@ -1,13 +1,13 @@
 {
   "name": "valha",
-  "version": "0.4.3",
+  "version": "0.5.0",
   "description": "Turn useful AI work into readable Valha pages, reuse trusted knowledge, and find Blueprints when requested.",
   "author": {
     "name": "Valha",
-    "url": "https://valha.link"
+    "url": "https://valha.ai"
   },
-  "homepage": "https://valha.link",
-  "repository": "https://github.com/Alex-Levacher/valha-plugin",
+  "homepage": "https://valha.ai",
+  "repository": "https://github.com/valha-ai/valha-plugin",
   "keywords": [
     "ai-native documents",
     "blueprints",
@@ -28,13 +28,13 @@
     "developerName": "Valha",
     "category": "Productivity",
     "capabilities": ["Read", "Write"],
-    "websiteURL": "https://valha.link",
+    "websiteURL": "https://valha.ai",
     "defaultPrompt": [
       "Save this work as a Valha page people will actually read.",
       "Find relevant Valha knowledge for this task.",
       "Find a suitable Valha Blueprint for this task."
     ],
-    "privacyPolicyURL": "https://valha.link/privacy",
-    "termsOfServiceURL": "https://valha.link/terms"
+    "privacyPolicyURL": "https://valha.ai/privacy",
+    "termsOfServiceURL": "https://valha.ai/terms"
   }
 }

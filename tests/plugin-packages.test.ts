@@ -10,12 +10,12 @@ const json = (root: URL, path: string) => JSON.parse(read(root, path));
 
 test("the package connects only to the production MCP server", () => {
   expect(json(production, ".mcp.json").mcpServers).toEqual({
-    valha: { type: "http", url: "https://valha.link/mcp" },
+    valha: { type: "http", url: "https://valha.ai/mcp" },
   });
   for (const skill of skills) {
     const dependency = read(production, `skills/${skill}/agents/openai.yaml`);
     expect(dependency).toContain('value: "valha"');
-    expect(dependency).toContain("https://valha.link/mcp");
+    expect(dependency).toContain("https://valha.ai/mcp");
   }
 });
 

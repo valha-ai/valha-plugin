@@ -1,7 +1,7 @@
 # Valha plugin
 
 The official Valha plugin for Codex and Claude Code: three skills and a connection
-to the hosted Valha MCP server at `https://valha.link/mcp`. This repository holds no
+to the hosted Valha MCP server at `https://valha.ai/mcp`. This repository holds no
 server code, credentials, or customer data.
 
 Installation, sign-in, and updates: [plugins/valha/README.md](./plugins/valha/README.md).
@@ -17,5 +17,5 @@ update ChatGPT imports or the OpenAI Platform submission.
 ## Security and terms
 
 Report vulnerabilities privately as described in [SECURITY.md](./SECURITY.md).
-Valha's [Privacy Policy](https://valha.link/privacy) and [Terms](https://valha.link/terms)
+Valha's [Privacy Policy](https://valha.ai/privacy) and [Terms](https://valha.ai/terms)
 apply to the hosted service. This package is not open source; see [LICENSE](./LICENSE).

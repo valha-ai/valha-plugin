@@ -2,6 +2,12 @@
 
 All notable public beta plugin contract changes are documented here.
 
+## 0.5.0 (2026-10-03)
+
+- Moved to `https://valha.ai`: the MCP server is now `https://valha.ai/mcp`, and the website, support, privacy, and terms links follow. **Reconnection required:** sign-in is bound to the server address, so remove the old Valha connection and sign in again after updating.
+- The repository moved to `valha-ai/valha-plugin`; the former `Alex-Levacher/valha-plugin` path redirects.
+- Support email is now `contact@valha.ai`.
+
 ## 0.4.3 (2026-10-01)
 
 - Described Blueprints as methods written by people in the user's own workspace, returned only after the user selects one; their behavior is unchanged.
@@ -14,7 +20,7 @@ All notable public beta plugin contract changes are documented here.
 ## 0.4.1 (2026-09-30)
 
 - Unified the MCP dependency description in every skill's Codex metadata.
-- Reduced both READMEs to installation, sign-in, updates, and terms; other assistants are covered at valha.link/connect.
+- Reduced both READMEs to installation, sign-in, updates, and terms; other assistants are covered on the Valha website.
 
 ## 0.4.0 (2026-09-30)
 
@@ -44,5 +50,5 @@ All notable public beta plugin contract changes are documented here.
 ## 0.1.0
 
 - Initial Codex and Claude Code beta package.
-- Hosted OAuth MCP connection to `https://valha.link/mcp`.
+- Hosted OAuth MCP connection to the Valha server.
 - Skills for saving work, reusing Valha knowledge, and applying reviewed Blueprints.
