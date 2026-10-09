@@ -2,6 +2,10 @@
 
 All notable public beta plugin contract changes are documented here.
 
+## 0.5.1 (2026-10-09)
+
+- After saving a page, the assistant hands back its members-only Valha link (`appUrl`), so a private page no longer ends a save without a link. The link opens the page in the right workspace and publishes nothing.
+
 ## 0.5.0 (2026-10-03)
 
 - Moved to `https://valha.ai`: the MCP server is now `https://valha.ai/mcp`, and the website, support, privacy, and terms links follow. **Reconnection required:** sign-in is bound to the server address, so remove the old Valha connection and sign in again after updating.
