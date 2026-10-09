@@ -18,7 +18,7 @@ Do not search Blueprints as a prerequisite to page authoring. Search only when t
 5. Before creating or changing `section.render`, call `get_authoring_help` with `topic=components` and `names` for the components you intend to use. Request more names if the composition changes; omit `names` only when the full catalog is genuinely needed. Call `topic=design` before using `<Custom>`, or for detailed layout or specialized component guidance when the essential rules are insufficient. Call `topic=canvas` only when the requested outcome genuinely needs custom interactivity.
 6. Create or edit the page using the narrowest appropriate tool.
 7. After creating or changing a Canvas, when a browser is available, open the resulting page and verify that the interactive frame renders and its controls respond. MCP acceptance does not prove runtime health.
-8. Return the page title, its visibility, the url or shareUrl the write returned, revision, and a concise account of what changed.
+8. Return the page title, its visibility, the members-only `appUrl` the write returned (always after creating a page; it opens the page in Valha and publishes nothing), any `url` or `shareUrl`, revision, and a concise account of what changed.
 
 ## Create a page
 
