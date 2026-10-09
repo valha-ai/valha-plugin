@@ -49,6 +49,41 @@ test("the Claude manifest matches its marketplace entry and the Codex manifest",
   expect(new URL(`${marketplace.plugins[0].source}/`, repository).href).toBe(production.href);
 });
 
+test("the OpenAI upload includes the listing URLs and review materials without credentials", () => {
+  const codex = json(production, ".codex-plugin/plugin.json");
+  const claude = json(production, ".claude-plugin/plugin.json");
+  const { review, publication } = codex.extensions["com.openai"];
+
+  expect(codex.interface.websiteURL).toBe(claude.homepage);
+  expect(codex.interface.supportURL).toBe(claude.supportUrl);
+  expect(codex.interface.privacyPolicyURL).toBe(claude.privacyPolicyUrl);
+  expect(codex.interface.termsOfServiceURL).toBe(claude.termsOfServiceUrl);
+  expect(codex.interface.shortDescription.length).toBeLessThanOrEqual(30);
+  expect(codex.apps).toBeUndefined();
+  expect(codex.extensions["com.openai"].apps).toBeUndefined();
+  expect(review.test_cases.positive).toHaveLength(5);
+  expect(review.test_cases.negative).toHaveLength(3);
+  for (const item of review.test_cases.positive) {
+    expect(item.description).toBeTruthy();
+    expect(item.prompt).toBeTruthy();
+    expect(item.tools_triggered).toBeTruthy();
+    expect(item.expected_behavior).toBeTruthy();
+  }
+  for (const item of review.test_cases.negative) {
+    expect(item.description).toBeTruthy();
+    expect(item.prompt).toBeTruthy();
+    expect(item.expected_behavior).toBeTruthy();
+  }
+  expect(review.test_credentials).toBeUndefined();
+  expect(review.reviewer_instructions).toBeUndefined();
+  expect(review.commerce).toBe(false);
+  expect(publication.countries).toEqual([]);
+  expect(publication.release_notes).toContain(codex.version);
+  expect(publication.translations["fr-FR"].subtitle?.length ?? 0).toBeLessThanOrEqual(30);
+  expect(publication.translations["fr-FR"].description.length).toBeLessThanOrEqual(4000);
+  expect(publication.translations["en-US"]).toBeUndefined();
+});
+
 test("skills tell the assistant to stop when Valha is not connected", () => {
   for (const skill of skills) {
     expect(read(production, `skills/${skill}/SKILL.md`)).toContain(

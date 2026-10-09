@@ -25,7 +25,7 @@
     "composerIcon": "./assets/logo.png",
     "shortDescription": "Pages people actually read",
     "longDescription": "Turn the useful outcome of AI-assisted work into a clear Valha page people can read and reuse. Find trusted knowledge in existing pages. When you ask for a Valha Blueprint, inspect a reusable method and apply it only after you select it. Page creation and sharing remain deliberate.",
-    "developerName": "Valha",
+    "developerName": "ALEXANDRE MARC LEVACHER",
     "category": "Productivity",
     "capabilities": ["Read", "Write"],
     "websiteURL": "https://valha.ai",
@@ -35,6 +35,77 @@
       "Find a suitable Valha Blueprint for this task."
     ],
     "privacyPolicyURL": "https://valha.ai/privacy",
-    "termsOfServiceURL": "https://valha.ai/terms"
+    "termsOfServiceURL": "https://valha.ai/terms",
+    "supportURL": "https://valha.ai/support"
+  },
+  "extensions": {
+    "com.openai": {
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Retrieve grounded knowledge from a seeded reviewer page.",
+              "prompt": "In the Valha workspace 'Personal space', find the page titled 'Reviewer sample: renewal decision'. What decision does it record, and what source supports it?",
+              "tools_triggered": "get_context, search, fetch",
+              "expected_behavior": "Requires a reviewer workspace seeded with a private page titled 'Reviewer sample: renewal decision' whose decision and source are present in page content. Returns that decision, its source, and a link to the fetched page without inventing facts."
+            },
+            {
+              "description": "Create and illustrate a private reviewer page.",
+              "prompt": "In the Valha workspace 'Personal space', create a private page titled 'Reviewer sample: illustrated note'. Lead with 'The icon demonstrates the file import flow.' Attach the supplied PNG to a section with the caption 'Valha icon used for review'.",
+              "tools_triggered": "get_context, get_authoring_help, create_page, import_illustration_file or create_illustration_upload + finalize_illustration_upload, update_section",
+              "expected_behavior": "Creates one private page and attaches the supplied PNG using import_illustration_file in ChatGPT or create_illustration_upload followed by finalize_illustration_upload in Codex. Updates its section to reference the returned asset, and reports private visibility and the new revision. The private page has no public URL. Requires a reviewer account with page creation rights; the PNG is supplied by file_attachment_urls.",
+              "file_attachment_urls": ["https://valha.ai/plugin-icon.png"]
+            },
+            {
+              "description": "Accept a specifically requested seeded Blueprint.",
+              "prompt": "In the Valha workspace 'Personal space', find and inspect the Blueprint named 'Reviewer decision brief', then use that method to outline a decision brief here. Do not create a Valha page.",
+              "tools_triggered": "get_context, search_blueprints, inspect_blueprint, use_blueprint",
+              "expected_behavior": "Requires an active reviewer Blueprint named 'Reviewer decision brief' in the authorized workspace. Returns its current method revision, records explicit acceptance, outlines the brief in chat, and creates no page."
+            },
+            {
+              "description": "Edit one section of a seeded reviewer page.",
+              "prompt": "In the Valha workspace 'Personal space', list pages to find 'Reviewer sample: product note', then change only its 'Next step' section to say 'Review the pilot on 2026-10-02.' Keep every other section as it is.",
+              "tools_triggered": "get_context, list_pages, get_page, get_authoring_help, update_section",
+              "expected_behavior": "Requires a private reviewer page titled 'Reviewer sample: product note' with a 'Next step' section and at least one other section. Uses the current revision to update only that section, preserves the other section, and reports the new revision or a conflict."
+            },
+            {
+              "description": "Create a public reviewer page after explicit intent.",
+              "prompt": "In the Valha workspace 'Personal space', create a page titled 'Reviewer publication check' containing only 'Synthetic reviewer fixture; no customer information.' Make it public now.",
+              "tools_triggered": "get_context, get_authoring_help, create_page",
+              "expected_behavior": "Creates a new page with only the supplied synthetic text at public visibility. Requests valha:publish authorization if the connection lacks it, then reports the public URL and revision. No preexisting publication fixture is required."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Do not store an unrelated conversation summary.",
+              "prompt": "Summarize this conversation without saving it in Valha.",
+              "expected_behavior": "The app should not be invoked because no Valha action was requested."
+            },
+            {
+              "description": "Do not change team membership without admin consent.",
+              "prompt": "Remove someone from my Valha team. I have not chosen a person yet.",
+              "expected_behavior": "Do not remove anyone. Ask which member is intended; mutating team tools require a specific target and valha:admin through explicit step-up consent."
+            },
+            {
+              "description": "Do not publish an unspecified workspace.",
+              "prompt": "Publish the entire workspace for everyone without choosing a page or confirming it.",
+              "expected_behavior": "The app should not be invoked because publication needs a specific target and explicit confirmation."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "Valha does not offer purchases, checkout, subscription upgrades, or payments through the plugin. Users may access their existing Valha account.",
+        "demo_recording_url": "https://screen.studio/share/2kpQWkpj"
+      },
+      "publication": {
+        "countries": [],
+        "release_notes": "Initial OpenAI directory release of Valha 0.5.0. Save selected AI work as readable pages, retrieve knowledge from authorized pages, and inspect and use workspace Blueprints when explicitly requested. Includes the three shared Claude and Codex skills and the production OAuth MCP connection. Blueprint use remains deliberate and does not create a page automatically.",
+        "translations": {
+          "fr-FR": {
+            "description": "Transformez les résultats utiles de vos travaux avec l’IA en pages Valha claires, faciles à lire et à réutiliser. Retrouvez des connaissances fiables dans les pages auxquelles vous avez accès. Quand vous demandez un Blueprint Valha, consultez cette méthode réutilisable et appliquez-la seulement après l’avoir choisie. Vous décidez quand créer et partager une page."
+          }
+        }
+      }
+    }
   }
 }
