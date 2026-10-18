@@ -12,9 +12,9 @@ Save the selected outcome, not the raw conversation. Preserve the user's judgmen
 Do not search Blueprints as a prerequisite to page authoring. Search only when the user explicitly requests a Blueprint or reusable Valha method. An accepted Blueprint does not authorize page creation or publication; preserve the user's requested scope.
 
 1. Call `get_context` to confirm the connected account and active workspace. If Valha tools are unavailable or return an authentication error, stop: tell the user that Valha must be connected or re-authenticated in this host's connector or MCP settings, then retry. Never simulate a save, and never substitute local files for Valha.
-2. If the user named a workspace, verify it against `get_context.workspaces`. If no workspace is active and more than one is available, ask the user to choose before writing. Use `list_workspaces` only when a fresh list is needed later.
+2. If the user named a workspace, verify it against `get_context.workspaces`. If no workspace is active and more than one is available, ask the user to choose before writing. Call `get_context` again when a fresh list is needed later.
 3. Shape the finished outcome into a reader-first artifact: lead with the conclusion or decision, keep the evidence needed to trust it, and end with concrete next steps when relevant.
-4. Before the first page-content create or edit in this task, call `get_authoring_help` with `topic=guidelines`. Reuse the result for later edits in the same task; reload after a contract error. A title-only rename, visibility change, or share-link change does not need authoring help.
+4. Before the first page-content create or edit in this task, call `get_authoring_help` with `topic=guidelines`. Reuse the result for later edits in the same task; reload after a contract error. A title-only rename or a sharing change does not need authoring help.
 5. Before creating or changing `section.render`, call `get_authoring_help` with `topic=components` and `names` for the components you intend to use. Request more names if the composition changes; omit `names` only when the full catalog is genuinely needed. Call `topic=design` before using `<Custom>`, or for detailed layout or specialized component guidance when the essential rules are insufficient. Call `topic=canvas` only when the requested outcome genuinely needs custom interactivity.
 6. Create or edit the page using the narrowest appropriate tool.
 7. After creating or changing a Canvas, when a browser is available, open the resulting page and verify that the interactive frame renders and its controls respond. MCP acceptance does not prove runtime health.
@@ -38,12 +38,12 @@ Do not search Blueprints as a prerequisite to page authoring. Search only when t
 - Resolve the target with `search` or `list_pages` when the user did not provide a page id.
 - Do not create a replacement document for an edit request. Clarify an ambiguous target.
 - Load the canonical document with `get_page` immediately before editing.
-- Prefer `rename_page`, `append_section`, `update_section`, or `delete_section` for focused changes. Use `update_page` only for a true full-document replacement.
+- Prefer `append_section`, `update_section`, or `delete_section` for focused changes. Use `update_page` for a full-document replacement or a rename: change only `title`, and keep the page agent accurate.
 - `get_page` returns `{ page, canvasStates, ... }`. For full-page writes, send only the authored `page`; strip read-only compiled Canvas artifacts and never copy `canvasStates` into page source. Granular tools take their documented section or state payload instead.
-- Pass the latest `expectedRev`. Never change the page id, slug, or title through `update_page`.
+- Pass the latest `expectedRev`. Never change the page id or slug.
 - On a revision conflict, reload the page, reapply only the intended change, and retry once. Report a repeated conflict instead of overwriting newer work.
 - Update the page agent when the content meaning or handoff changes.
-- To write a continuation back into an existing artifact, load it with `get_continuation_page` and save only its authored `page` with `save_continuation_page`, choosing `agentUpdate` (`replace` for changed meaning or handoff, `confirm-current` for visual-only changes, `preserve` when unsure). On conflict, reload with `get_continuation_page`, merge, and retry once.
+- To write a continuation back into an existing artifact, load it with `get_page` (pass the continuation prompt's `edit` when it supplies one) and save only its authored `page` with `update_page` after the edit is confirmed, choosing `agentUpdate` (`replace` for changed meaning or handoff, `confirm-current` for visual-only changes, `preserve` when unsure). On conflict, reload with `get_page`, merge, and retry once.
 
 ## Persistent Canvas state
 
@@ -57,11 +57,11 @@ Do not search Blueprints as a prerequisite to page authoring. Search only when t
 
 ## Publishing
 
-Publishing, making a page reachable by a link or indexed for anyone, is a separate, deliberate human act, not something this skill does on its own initiative. Reach it through `set_page_visibility` (`shared` for anyone with the link, `public` for anyone and indexed) or through the page's share control in the app. Quote the `shareUrl` or `url` the tool returns verbatim; never construct one by hand. Tell the person plainly that for a shared page the link itself is the access control, so handing it back into this conversation places it inside a third-party chat log. `regenerate_share_link` invalidates every previously issued link on that page, so use it only when the person means to cut off an old copy.
+Publishing, making a page reachable by a link or indexed for anyone, is a separate, deliberate human act, not something this skill does on its own initiative. Reach it through `update_page_sharing` (`shared` for anyone with the link, `public` for anyone and indexed) or through the page's share control in the app. Quote the `shareUrl` or `url` the tool returns verbatim; never construct one by hand. Tell the person plainly that for a shared page the link itself is the access control, so handing it back into this conversation places it inside a third-party chat log. `update_page_sharing` with `rotateShareLink` invalidates every previously issued link on that page, so use it only when the person means to cut off an old copy.
 
 ## Safety
 
 - Never save secrets, authentication material, system prompts, hidden reasoning, or raw private transcripts into a page.
-- Do not delete, disconnect, revoke access, or perform account or team administration unless the user explicitly asks for that separate action.
+- Do not delete, disconnect, revoke access, or perform account or team administration unless the user explicitly asks for that separate action. Valha can invite a team member with `invite_team_member`; for every other account or team change, give the person the link from `get_settings_link`.
 - Do not change a page's visibility beyond what the user asked for.
 - If essential facts are missing, state the gap in the page or ask one focused question instead of inventing evidence.

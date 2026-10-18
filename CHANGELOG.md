@@ -2,6 +2,16 @@
 
 All notable public beta plugin contract changes are documented here.
 
+## 0.6.0 (2026-10-18)
+
+- Valha exposes 31 tools instead of 46, following the Claude and OpenAI tool guidance: one tool per object, risk level, and user intent. Skills now name the merged tools.
+- Continuations load with `get_page` (passing the prompt's `edit` when supplied) and save with `update_page`; `get_continuation_page` and `save_continuation_page` are gone.
+- `update_page` also renames a page; `rename_page` is gone.
+- `update_page_sharing` replaces `set_page_visibility`, and its `rotateShareLink` flag replaces `regenerate_share_link`.
+- `get_context` lists every accessible workspace; `list_workspaces` is gone.
+- Team administration keeps `get_team_settings` and `invite_team_member`; every other account or team change, including disconnection, goes through the link returned by `get_settings_link`.
+- Page writes return a compact summary (id, revision, section outline, links) instead of echoing the whole document.
+
 ## 0.5.1 (2026-10-09)
 
 - After saving a page, the assistant hands back its members-only Valha link (`appUrl`), so a private page no longer ends a save without a link. The link opens the page in the right workspace and publishes nothing.
