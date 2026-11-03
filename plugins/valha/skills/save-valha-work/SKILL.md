@@ -1,6 +1,6 @@
 ---
 name: save-valha-work
-description: Turns completed AI-assisted work into a deliberate Valha page, groups pages under a parent page, or safely edits an existing Valha page. Use when the user asks to save, publish, share, preserve, update, rename, organize, or add material to work in Valha, for example "sauve ça dans Valha", "publie sur Valha", "crée un dossier Valha", or "mets à jour la page Valha". Not for read-only lookups in Valha; use use-valha-knowledge for those.
+description: Save, edit, share, publish or organize Valha pages when the user asks.
 ---
 
 # Save Valha Work
@@ -9,7 +9,7 @@ Save the selected outcome, not the raw conversation. Preserve the user's judgmen
 
 ## Workflow
 
-Do not search Blueprints as a prerequisite to page authoring. Search only when the user explicitly requests a Blueprint or reusable Valha method. An accepted Blueprint does not authorize page creation or publication; preserve the user's requested scope.
+Do not search Playbooks as a prerequisite to page authoring. Search only when the user explicitly requests a Playbook or reusable Valha method. An accepted Playbook does not authorize page creation or publication; preserve the user's requested scope.
 
 1. Call `get_context` to confirm the connected account and active workspace. If Valha tools are unavailable or return an authentication error, stop: tell the user that Valha must be connected or re-authenticated in this host's connector or MCP settings, then retry. Never simulate a save, and never substitute local files for Valha.
 2. If the user named a workspace, verify it against `get_context.workspaces`. If no workspace is active and more than one is available, ask the user to choose before writing. Call `get_context` again when a fresh list is needed later.

@@ -6,6 +6,6 @@ dependencies:
   tools:
     - type: "mcp"
       value: "valha"
-      description: "Valha MCP server for pages, knowledge, and Blueprints"
+      description: "Valha MCP server for pages, knowledge, and Playbooks"
       transport: "streamable_http"
       url: "https://valha.ai/mcp"

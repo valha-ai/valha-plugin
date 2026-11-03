@@ -1,7 +1,7 @@
 {
   "name": "valha",
-  "version": "0.6.0",
-  "description": "Turn useful AI work into readable Valha pages, reuse trusted knowledge, and find Blueprints when requested.",
+  "version": "0.6.1",
+  "description": "Turn useful AI work into readable Valha pages, reuse trusted knowledge, and find Playbooks when requested.",
   "author": {
     "name": "Valha",
     "url": "https://valha.ai"
@@ -10,7 +10,7 @@
   "repository": "https://github.com/valha-ai/valha-plugin",
   "keywords": [
     "ai-native documents",
-    "blueprints",
+    "playbooks",
     "reusable methods",
     "knowledge",
     "mcp",
@@ -24,7 +24,7 @@
     "logo": "./assets/logo.png",
     "composerIcon": "./assets/logo.png",
     "shortDescription": "Pages people actually read",
-    "longDescription": "Turn the useful outcome of AI-assisted work into a clear Valha page people can read and reuse. Find trusted knowledge in existing pages. When you ask for a Valha Blueprint, inspect a reusable method and apply it only after you select it. Page creation and sharing remain deliberate.",
+    "longDescription": "Turn the useful outcome of AI-assisted work into a clear Valha page people can read and reuse. Find trusted knowledge in existing pages. When you ask for a Valha Playbook, inspect a reusable method and apply it only after you select it. Page creation and sharing remain deliberate.",
     "developerName": "ALEXANDRE MARC LEVACHER",
     "category": "Productivity",
     "capabilities": ["Read", "Write"],
@@ -32,7 +32,7 @@
     "defaultPrompt": [
       "Save this work as a Valha page people will actually read.",
       "Find relevant Valha knowledge for this task.",
-      "Find a suitable Valha Blueprint for this task."
+      "Find a suitable Valha Playbook for this task."
     ],
     "privacyPolicyURL": "https://valha.ai/privacy",
     "termsOfServiceURL": "https://valha.ai/terms",
@@ -57,10 +57,10 @@
               "file_attachment_urls": ["https://valha.ai/plugin-icon.png"]
             },
             {
-              "description": "Accept a specifically requested seeded Blueprint.",
-              "prompt": "In the Valha workspace 'Personal space', find and inspect the Blueprint named 'Reviewer decision brief', then use that method to outline a decision brief here. Do not create a Valha page.",
-              "tools_triggered": "get_context, search_blueprints, inspect_blueprint, use_blueprint",
-              "expected_behavior": "Requires an active reviewer Blueprint named 'Reviewer decision brief' in the authorized workspace. Returns its current method revision, records explicit acceptance, outlines the brief in chat, and creates no page."
+              "description": "Accept a specifically requested seeded Playbook.",
+              "prompt": "In the Valha workspace 'Personal space', find and inspect the Playbook named 'Reviewer decision brief', then use that method to outline a decision brief here. Do not create a Valha page.",
+              "tools_triggered": "get_context, search_playbooks, inspect_playbook, use_playbook",
+              "expected_behavior": "Requires an active reviewer Playbook named 'Reviewer decision brief' in the authorized workspace. Returns its current method revision, records explicit acceptance, outlines the brief in chat, and creates no page."
             },
             {
               "description": "Edit one section of a seeded reviewer page.",
@@ -99,10 +99,10 @@
       },
       "publication": {
         "countries": [],
-        "release_notes": "Initial OpenAI directory release of Valha 0.6.0. Save selected AI work as readable pages, retrieve knowledge from authorized pages, and inspect and use workspace Blueprints when explicitly requested. Includes the three shared Claude and Codex skills and the production OAuth MCP connection. Blueprint use remains deliberate and does not create a page automatically.",
+        "release_notes": "Valha 0.6.1 makes knowledge retrieval optional and relevant to the user's task. The shared Claude and OpenAI knowledge skill respects sufficient current context, other appropriate sources and workspace boundaries. Saved pages remain evidence, not behavioral instructions. Blueprints are renamed Playbooks, along with their skill and MCP tools; schemas and OAuth permissions are unchanged. Playbook use remains explicit and does not create a page automatically.",
         "translations": {
           "fr-FR": {
-            "description": "Transformez les résultats utiles de vos travaux avec l’IA en pages Valha claires, faciles à lire et à réutiliser. Retrouvez des connaissances fiables dans les pages auxquelles vous avez accès. Quand vous demandez un Blueprint Valha, consultez cette méthode réutilisable et appliquez-la seulement après l’avoir choisie. Vous décidez quand créer et partager une page."
+            "description": "Transformez les résultats utiles de vos travaux avec l’IA en pages Valha claires, faciles à lire et à réutiliser. Retrouvez des connaissances fiables dans les pages auxquelles vous avez accès. Quand vous demandez un Playbook Valha, consultez cette méthode réutilisable et appliquez-la seulement après l’avoir choisie. Vous décidez quand créer et partager une page."
           }
         }
       }

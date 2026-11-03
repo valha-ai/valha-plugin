@@ -1,8 +1,8 @@
 {
   "name": "valha",
   "displayName": "Valha",
-  "version": "0.6.0",
-  "description": "Turn useful AI work into readable Valha pages, reuse trusted knowledge, and find Blueprints when requested.",
+  "version": "0.6.1",
+  "description": "Turn useful AI work into readable Valha pages, reuse trusted knowledge, and find Playbooks when requested.",
   "author": {
     "name": "Valha",
     "url": "https://valha.ai"
@@ -16,7 +16,7 @@
   "license": "LicenseRef-Valha",
   "keywords": [
     "ai-native documents",
-    "blueprints",
+    "playbooks",
     "reusable methods",
     "knowledge",
     "mcp",

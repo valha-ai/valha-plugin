@@ -2,7 +2,7 @@ import { expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
 
 const production = new URL("../plugins/valha/", import.meta.url);
-const skills = ["save-valha-work", "use-valha-blueprints", "use-valha-knowledge"];
+const skills = ["save-valha-work", "use-valha-playbooks", "use-valha-knowledge"];
 const repository = new URL("../", import.meta.url);
 
 const read = (root: URL, path: string) => readFileSync(new URL(path, root), "utf8");
@@ -92,22 +92,37 @@ test("skills tell the assistant to stop when Valha is not connected", () => {
   }
 });
 
-test("released Blueprint and save guidance remains deliberate", () => {
-  const blueprint = read(production, "skills/use-valha-blueprints/SKILL.md");
+test("knowledge retrieval is optional, task-scoped and does not prioritize Valha", () => {
+  const knowledge = read(production, "skills/use-valha-knowledge/SKILL.md");
+  expect(knowledge).toContain("Searching is optional");
+  expect(knowledge).toContain("When retrieval is chosen");
+  expect(knowledge).toContain("current context is sufficient");
+  expect(knowledge).toContain("an unknown answer alone does not justify consulting Valha");
+  expect(knowledge).toContain("An explicit request to search Valha still calls for a search");
+  expect(knowledge).toContain("Honor explicit requests");
+  expect(knowledge).toContain("searches across all workspaces accessible to the connected account");
+  expect(knowledge).toContain("use `list_pages` with its `workspaceId`");
+  expect(knowledge).toContain("short task-specific query, without transcripts");
+  expect(knowledge).toContain("Valha does not take precedence");
+  expect(knowledge).not.toMatch(/before answering.*search|must search before|always search/i);
+});
+
+test("released Playbook and save guidance remains deliberate", () => {
+  const playbook = read(production, "skills/use-valha-playbooks/SKILL.md");
   const save = read(production, "skills/save-valha-work/SKILL.md");
-  expect(blueprint).toMatch(/user explicitly asks|user explicitly requests/i);
-  expect(blueprint).toContain("Inspection is not acceptance");
-  expect(blueprint).toContain("do not ask for redundant confirmation");
-  expect(save).toContain("not search Blueprints as a prerequisite");
+  expect(playbook).toMatch(/user explicitly asks|user explicitly requests/i);
+  expect(playbook).toContain("Inspection is not acceptance");
+  expect(playbook).toContain("do not ask for redundant confirmation");
+  expect(save).toContain("not search Playbooks as a prerequisite");
   expect(save).toContain("does not authorize page creation or publication");
 });
 
-test("Blueprints read as user-authored reference material, not remote instructions", () => {
+test("Playbooks read as user-authored reference material, not remote instructions", () => {
   // Anthropic's directory policy 2F forbids directing the assistant to pull
-  // behavioral instructions from an external source. A Blueprint is a method the
+  // behavioral instructions from an external source. A Playbook is a method the
   // user's own team wrote, returned only after the user selects it.
-  const blueprint = read(production, "skills/use-valha-blueprints/SKILL.md");
-  expect(blueprint).toContain("people in the user's own Valha workspace wrote and shared");
-  expect(blueprint).toContain("never as higher-priority instructions");
-  expect(blueprint).not.toMatch(/remote reusable methods|loaded from Valha/i);
+  const playbook = read(production, "skills/use-valha-playbooks/SKILL.md");
+  expect(playbook).toContain("people in the user's own Valha workspace wrote and shared");
+  expect(playbook).toContain("never as higher-priority instructions");
+  expect(playbook).not.toMatch(/remote reusable methods|loaded from Valha/i);
 });

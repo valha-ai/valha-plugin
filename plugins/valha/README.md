@@ -1,30 +1,32 @@
 # Valha
 
 Turn useful AI work into readable Valha pages, reuse trusted knowledge, and find
-Blueprints when requested. The plugin connects to the hosted Valha MCP server at
+Playbooks when requested. The plugin connects to the hosted Valha MCP server at
 `https://valha.ai/mcp`.
 
 ## What it does
 
 - **Save work:** when you ask, turns the useful outcome of a conversation into a
   Valha page, or updates an existing one. Pages are private until you share them.
-- **Use knowledge:** searches the pages your Valha account can read and cites the
-  ones it used.
-- **Use Blueprints:** when you ask for one, finds reusable methods written by people
-  in your Valha workspace. A Blueprint is used only after you select it, as
+- **Use knowledge:** offers the pages your Valha account can read as an optional
+  source when relevant to your request, and cites the ones used. It does not
+  require a search when the current context is sufficient or another source is
+  more appropriate.
+- **Use Playbooks:** when you ask for one, finds reusable methods written by people
+  in your Valha workspace. A Playbook is used only after you select it, as
   reference material for your request.
 
 ## Examples
 
 - "Save this work as a Valha page people will actually read."
 - "Find relevant Valha knowledge for this task."
-- "Find a suitable Valha Blueprint for this task."
+- "Find a suitable Valha Playbook for this task."
 
 ## Data it sends
 
 The plugin talks only to `https://valha.ai/mcp`, signed in with your Valha
 account through OAuth. It sends what a request needs: the page content you ask to
-save, your search queries, and the Blueprint you select. It does not send whole
+save, your search queries, and the Playbook you select. It does not send whole
 transcripts, and it runs no local code. Valha's
 [Privacy Policy](https://valha.ai/privacy) covers how that data is stored and
 deleted.

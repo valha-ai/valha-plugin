@@ -2,6 +2,14 @@
 
 All notable public beta plugin contract changes are documented here.
 
+## 0.6.1 (2026-11-03)
+
+- Blueprints are now Playbooks. The skill is `use-valha-playbooks`, and the nine MCP tools are `list_playbooks`, `search_playbooks`, `inspect_playbook`, `use_playbook`, `create_playbook`, `update_playbook`, `set_playbook_status`, `delete_playbook` and `record_playbook_outcome`; the `*_blueprint*` names are gone. Their schemas and permissions are unchanged.
+- Shorter skill descriptions keep only the capability and relevant trigger; workflow details remain in the skill body.
+- Knowledge retrieval is optional and limited to saved work or personal and company information relevant to the user's request. Sufficient current context and other appropriate sources do not require a Valha search.
+- The knowledge skill keeps retrieval task-scoped, verifies evidence only after lookup is chosen, and does not block unrelated work when Valha is unavailable.
+- Hosted MCP descriptions describe operations and side effects without requiring knowledge lookup or loading behavioral instructions from another tool. Apart from the Playbook rename, tool schemas, permissions and runtime behavior are unchanged.
+
 ## 0.6.0 (2026-10-18)
 
 - Valha exposes 31 tools instead of 46, following the Claude and OpenAI tool guidance: one tool per object, risk level, and user intent. Skills now name the merged tools.

@@ -1,0 +1,11 @@
+interface:
+  display_name: "Use Valha Playbooks"
+  short_description: "Find a Valha Playbook when you ask for one"
+  default_prompt: "Use $use-valha-playbooks to find and inspect a Valha Playbook for this goal. Apply it only after my selection."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "valha"
+      description: "Valha MCP server for pages, knowledge, and Playbooks"
+      transport: "streamable_http"
+      url: "https://valha.ai/mcp"
