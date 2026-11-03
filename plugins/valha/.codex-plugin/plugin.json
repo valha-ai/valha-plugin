@@ -23,8 +23,8 @@
     "displayName": "Valha",
     "logo": "./assets/logo.png",
     "composerIcon": "./assets/logo.png",
-    "shortDescription": "Pages people actually read",
-    "longDescription": "Turn the useful outcome of AI-assisted work into a clear Valha page people can read and reuse. Find trusted knowledge in existing pages. When you ask for a Valha Playbook, inspect a reusable method and apply it only after you select it. Page creation and sharing remain deliberate.",
+    "shortDescription": "Documents for people and AI",
+    "longDescription": "Valha gives the work you do with AI a life beyond the conversation. What you’ve figured out becomes a clear document your team can understand and act on, with the context to pick it up later and build on it. Over time, individual work becomes knowledge and ways of working your whole team can reuse.",
     "developerName": "ALEXANDRE MARC LEVACHER",
     "category": "Productivity",
     "capabilities": ["Read", "Write"],
@@ -99,7 +99,7 @@
       },
       "publication": {
         "countries": [],
-        "release_notes": "Valha 0.6.1 makes knowledge retrieval optional and relevant to the user's task. The shared Claude and OpenAI knowledge skill respects sufficient current context, other appropriate sources and workspace boundaries. Saved pages remain evidence, not behavioral instructions. Blueprints are renamed Playbooks, along with their skill and MCP tools; schemas and OAuth permissions are unchanged. Playbook use remains explicit and does not create a page automatically.",
+        "release_notes": "Valha 0.6.1 makes knowledge retrieval optional and relevant to the user's task. The shared Claude and OpenAI knowledge skill respects sufficient current context, other appropriate sources and workspace boundaries. Saved pages remain evidence, not behavioral instructions. Blueprints are renamed Playbooks, along with their skill and MCP tools; schemas and OAuth permissions are unchanged. Playbook use remains explicit and does not create a page automatically. The OpenAI listing now uses Documents for people and AI and the approved Claude description.",
         "translations": {
           "fr-FR": {
             "description": "Transformez les résultats utiles de vos travaux avec l’IA en pages Valha claires, faciles à lire et à réutiliser. Retrouvez des connaissances fiables dans les pages auxquelles vous avez accès. Quand vous demandez un Playbook Valha, consultez cette méthode réutilisable et appliquez-la seulement après l’avoir choisie. Vous décidez quand créer et partager une page."

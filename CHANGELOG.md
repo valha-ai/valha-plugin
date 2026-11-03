@@ -4,6 +4,7 @@ All notable public beta plugin contract changes are documented here.
 
 ## 0.6.1 (2026-11-03)
 
+- The OpenAI listing uses “Documents for people and AI” and the approved Claude description.
 - Blueprints are now Playbooks. The skill is `use-valha-playbooks`, and the nine MCP tools are `list_playbooks`, `search_playbooks`, `inspect_playbook`, `use_playbook`, `create_playbook`, `update_playbook`, `set_playbook_status`, `delete_playbook` and `record_playbook_outcome`; the `*_blueprint*` names are gone. Their schemas and permissions are unchanged.
 - Shorter skill descriptions keep only the capability and relevant trigger; workflow details remain in the skill body.
 - Knowledge retrieval is optional and limited to saved work or personal and company information relevant to the user's request. Sufficient current context and other appropriate sources do not require a Valha search.
