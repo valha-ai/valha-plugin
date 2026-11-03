@@ -117,6 +117,31 @@ test("released Playbook and save guidance remains deliberate", () => {
   expect(save).toContain("does not authorize page creation or publication");
 });
 
+test("private-page guidance retires MCP sharing without a silent private substitute", () => {
+  const save = read(production, "skills/save-valha-work/SKILL.md");
+  const knowledge = read(production, "skills/use-valha-knowledge/SKILL.md");
+  const playbooks = read(production, "skills/use-valha-playbooks/SKILL.md");
+  const codex = json(production, ".codex-plugin/plugin.json");
+  for (const guidance of [save, knowledge, playbooks]) {
+    expect(guidance).not.toContain("update_page_sharing");
+    expect(guidance).not.toContain("valha:publish");
+    expect(guidance).toContain("Valha app");
+  }
+  expect(save).toContain("Do not silently substitute a private save");
+  expect(save).toContain("MCP state writes to shared/public pages are refused");
+  expect(save).toContain("invite_team_member");
+  expect(codex.description).toContain("private Valha pages");
+  const positive = codex.extensions["com.openai"].review.test_cases.positive;
+  expect(
+    positive.some((item: { prompt: string }) => item.prompt.includes("Reviewer project folder")),
+  ).toBe(true);
+  for (const item of positive) {
+    expect(item.tools_triggered).not.toContain("update_page_sharing");
+    expect(item.expected_behavior).not.toContain("valha:publish");
+    expect(item.prompt).not.toContain("Make it public");
+  }
+});
+
 test("Playbooks read as user-authored reference material, not remote instructions", () => {
   // Anthropic's directory policy 2F forbids directing the assistant to pull
   // behavioral instructions from an external source. A Playbook is a method the

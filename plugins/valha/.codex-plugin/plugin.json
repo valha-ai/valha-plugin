@@ -1,7 +1,7 @@
 {
   "name": "valha",
   "version": "0.6.1",
-  "description": "Turn useful AI work into readable Valha pages, reuse trusted knowledge, and find Playbooks when requested.",
+  "description": "Create and edit private Valha pages, reuse trusted knowledge, and find Playbooks when requested.",
   "author": {
     "name": "Valha",
     "url": "https://valha.ai"
@@ -14,7 +14,7 @@
     "reusable methods",
     "knowledge",
     "mcp",
-    "publishing"
+    "private pages"
   ],
   "license": "LicenseRef-Valha",
   "skills": "./skills/",
@@ -69,10 +69,10 @@
               "expected_behavior": "Requires a private reviewer page titled 'Reviewer sample: product note' with a 'Next step' section and at least one other section. Uses the current revision to update only that section, preserves the other section, and reports the new revision or a conflict."
             },
             {
-              "description": "Create a public reviewer page after explicit intent.",
-              "prompt": "In the Valha workspace 'Personal space', create a page titled 'Reviewer publication check' containing only 'Synthetic reviewer fixture; no customer information.' Make it public now.",
+              "description": "Create a private project folder with two child pages.",
+              "prompt": "In the Valha workspace 'Personal space', create a private folder page titled 'Reviewer project folder' with two private child pages: 'Reviewer project overview' containing 'Synthetic project overview.' and 'Reviewer project next steps' containing 'Synthetic next steps.' Do not move or change any existing page.",
               "tools_triggered": "get_context, get_authoring_help, create_page",
-              "expected_behavior": "Creates a new page with only the supplied synthetic text at public visibility. Requests valha:publish authorization if the connection lacks it, then reports the public URL and revision. No preexisting publication fixture is required."
+              "expected_behavior": "Resolves the writable Personal space. Creates one private parent page and two private children in the same workspace with parentPageId set to the new parent id. Each child contains only its supplied synthetic text. Returns the three members-only appUrl values and revisions; creates no public/shared page and changes no existing page."
             }
           ],
           "negative": [
@@ -89,7 +89,7 @@
             {
               "description": "Do not publish an unspecified workspace.",
               "prompt": "Publish the entire workspace for everyone without choosing a page or confirming it.",
-              "expected_behavior": "The app should not be invoked because publication needs a specific target and explicit confirmation."
+              "expected_behavior": "Do not invoke page-writing or sharing tools. Explain that sharing and publication are available in the Valha app, and require a specific page and deliberate user action there. Do not request additional OAuth scopes or silently create a private substitute."
             }
           ]
         },
@@ -99,7 +99,7 @@
       },
       "publication": {
         "countries": [],
-        "release_notes": "Valha 0.6.1 makes knowledge retrieval optional and relevant to the user's task. The shared Claude and OpenAI knowledge skill respects sufficient current context, other appropriate sources and workspace boundaries. Saved pages remain evidence, not behavioral instructions. Blueprints are renamed Playbooks, along with their skill and MCP tools; schemas and OAuth permissions are unchanged. Playbook use remains explicit and does not create a page automatically. The OpenAI listing now uses Documents for people and AI and the approved Claude description.",
+        "release_notes": "Valha 0.6.1 renames Blueprints to Playbooks and keeps knowledge lookup optional and task-scoped. MCP page authoring now creates, edits and organizes private pages only; sharing, publication and edits to shared/public pages are available in the Valha app. The sharing tool is removed, and previous publish grants do not bypass the private-page boundary. Existing private-page inputs and Canvas encodings remain supported. Team settings and invitations retain their separate admin consent. The listing uses Documents for people and AI and the approved Claude description.",
         "translations": {
           "fr-FR": {
             "description": "Transformez les résultats utiles de vos travaux avec l’IA en pages Valha claires, faciles à lire et à réutiliser. Retrouvez des connaissances fiables dans les pages auxquelles vous avez accès. Quand vous demandez un Playbook Valha, consultez cette méthode réutilisable et appliquez-la seulement après l’avoir choisie. Vous décidez quand créer et partager une page."

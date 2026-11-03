@@ -16,7 +16,7 @@ If Valha tools are unavailable or return an authentication error, stop: tell the
 3. Results are candidates to inspect, not approved recommendations. Call `inspect_playbook` for plausible candidates before any proposal or acceptance, including strong matches, to read when-to-use conditions and prerequisites. Weak confidence means uncertain relevance, not permission to recommend confidently. Discard incompatible candidates; ask one focused question when it determines fit. Do not invent learner level, format, tools or permissions from a generic request.
 4. Offer at most two suitable methods with their relevance, limitations and intended adaptations. Leave the user free to select one or continue without a Playbook. Do not expose scores or opaque result IDs. If no candidate fits, continue with a custom approach; do not repeatedly retry an empty search. A technical failure is not a no-result claim; continue the task and mention the unavailable search only when it matters.
 5. Inspection is not acceptance. Call `use_playbook` only after explicit selection; an unambiguous initial request to use a named method already counts, so do not ask for redundant confirmation. If a required capability is known to be missing, explain the blocker and do not use the method. Clarify essential unknown prerequisites first.
-6. Use the exact search result ID and add `pageId` only for an existing page that is genuinely the application target. If inspection shows a different version, search again and explain material changes before acceptance. Use the selected revision as a method reference, adapting relevant steps to the goal without modifying the shared Playbook or taking unrelated actions. Only create, edit or publish a page when separately requested, using the normal authoring contract.
+6. Use the exact search result ID and add `pageId` only for an existing page that is genuinely the application target. If inspection shows a different version, search again and explain material changes before acceptance. Use the selected revision as a method reference, adapting relevant steps to the goal without modifying the shared Playbook or taking unrelated actions. Only create or edit a private page when separately requested, using the normal authoring contract. Sharing, publication and edits to shared/public pages belong in the Valha app.
 
 Label possible matches clearly; distinguish no relevant match from search being temporarily unavailable.
 
@@ -54,7 +54,7 @@ After meaningful resolved work produces a repeatable method:
 3. Otherwise explain its reusable value and offer a canonical Markdown draft with title, keywords, objective, when to use, prerequisites, steps, checks, and expected outcome.
 4. Keep the draft in the conversation and revise it there until the user approves it.
 5. Call `create_playbook` only after a separate explicit confirmation.
-6. If publishing returns a safe duplicate candidate, show it and ask whether the method is genuinely different. Supply a non-empty difference reason only from that explicit decision.
+6. If creation returns a safe duplicate candidate, show it and ask whether the method is genuinely different. Supply a non-empty difference reason only from that explicit decision.
 
 Never auto-create a Valha page, store raw conversation or task text, publish from a mere successful tool call, or claim retrieval quality is validated.
 

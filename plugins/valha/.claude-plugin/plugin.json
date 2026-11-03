@@ -2,7 +2,7 @@
   "name": "valha",
   "displayName": "Valha",
   "version": "0.6.1",
-  "description": "Turn useful AI work into readable Valha pages, reuse trusted knowledge, and find Playbooks when requested.",
+  "description": "Create and edit private Valha pages, reuse trusted knowledge, and find Playbooks when requested.",
   "author": {
     "name": "Valha",
     "url": "https://valha.ai"
@@ -20,7 +20,7 @@
     "reusable methods",
     "knowledge",
     "mcp",
-    "publishing"
+    "private pages"
   ],
   "icon": "./assets/logo.png"
 }

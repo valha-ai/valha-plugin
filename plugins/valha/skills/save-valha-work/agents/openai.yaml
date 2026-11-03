@@ -1,6 +1,6 @@
 interface:
   display_name: "Save Valha Work"
-  short_description: "Turn completed work into a deliberate Valha page"
+  short_description: "Turn completed work into a readable private Valha page"
   default_prompt: "Use $save-valha-work to save this work as a Valha page."
 dependencies:
   tools:

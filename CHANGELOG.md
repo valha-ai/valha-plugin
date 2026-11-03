@@ -4,6 +4,8 @@ All notable public beta plugin contract changes are documented here.
 
 ## 0.6.1 (2026-11-03)
 
+- MCP page authoring is private-only. Sharing, publication, link rotation and edits to shared/public pages are available in the Valha app; `update_page_sharing` is removed. Private-page inputs and Canvas encodings are preserved. Team settings and invitations keep their separate admin consent.
+
 - The OpenAI listing uses “Documents for people and AI” and the approved Claude description.
 - Blueprints are now Playbooks. The skill is `use-valha-playbooks`, and the nine MCP tools are `list_playbooks`, `search_playbooks`, `inspect_playbook`, `use_playbook`, `create_playbook`, `update_playbook`, `set_playbook_status`, `delete_playbook` and `record_playbook_outcome`; the `*_blueprint*` names are gone. Their schemas and permissions are unchanged.
 - Shorter skill descriptions keep only the capability and relevant trigger; workflow details remain in the skill body.

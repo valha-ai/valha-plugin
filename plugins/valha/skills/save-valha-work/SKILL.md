@@ -1,6 +1,6 @@
 ---
 name: save-valha-work
-description: Save, edit, share, publish or organize Valha pages when the user asks.
+description: Save, edit or organize private Valha pages when the user asks.
 ---
 
 # Save Valha Work
@@ -14,9 +14,9 @@ Do not search Playbooks as a prerequisite to page authoring. Search only when th
 1. Call `get_context` to confirm the connected account and active workspace. If Valha tools are unavailable or return an authentication error, stop: tell the user that Valha must be connected or re-authenticated in this host's connector or MCP settings, then retry. Never simulate a save, and never substitute local files for Valha.
 2. If the user named a workspace, verify it against `get_context.workspaces`. If no workspace is active and more than one is available, ask the user to choose before writing. Call `get_context` again when a fresh list is needed later.
 3. Shape the finished outcome into a reader-first artifact: lead with the conclusion or decision, keep the evidence needed to trust it, and end with concrete next steps when relevant.
-4. Before the first page-content create or edit in this task, call `get_authoring_help` with `topic=guidelines`. Reuse the result for later edits in the same task; reload after a contract error. A title-only rename or a sharing change does not need authoring help.
+4. Before the first page-content create or edit in this task, call `get_authoring_help` with `topic=guidelines`. Reuse the result for later edits in the same task; reload after a contract error. A title-only rename does not need authoring help.
 5. Before creating or changing `section.render`, call `get_authoring_help` with `topic=components` and `names` for the components you intend to use. Request more names if the composition changes; omit `names` only when the full catalog is genuinely needed. Call `topic=design` before using `<Custom>`, or for detailed layout or specialized component guidance when the essential rules are insufficient. Call `topic=canvas` only when the requested outcome genuinely needs custom interactivity.
-6. Create or edit the page using the narrowest appropriate tool.
+6. Create or edit a private page using the narrowest appropriate tool. Shared/public pages remain readable when authorized, but their edits belong in the Valha app.
 7. After creating or changing a Canvas, when a browser is available, open the resulting page and verify that the interactive frame renders and its controls respond. MCP acceptance does not prove runtime health.
 8. Return the page title, its visibility, the members-only `appUrl` the write returned (always after creating a page; it opens the page in Valha and publishes nothing), any `url` or `shareUrl`, revision, and a concise account of what changed.
 
@@ -27,17 +27,17 @@ Do not search Playbooks as a prerequisite to page authoring. Search only when th
 - To move existing pages under a parent, present the exact moves, and only after explicit approval call `reorganize_page_hierarchy` with each page's latest `expectedRev`.
 - To add an illustration, ChatGPT uses `import_illustration_file` with an attached file; Codex and Claude Code use `create_illustration_upload` followed by `finalize_illustration_upload`.
 - A `create_page` timeout or lost response does not prove failure. Before retrying, inspect recent pages with `list_pages` and verify plausible matches with `get_page`. Reuse a confirmed successful creation. If the outcome remains uncertain, report it and ask before risking another creation; this write is not idempotent.
-- `create_page` saves a private page: workspace members only, no public URL. That is the default even when the user's request uses the word "publish"; treat the request as authorization to save, not to make the page public.
+- `create_page` saves only private pages: workspace members only, no public URL. If the user explicitly requests public or shared visibility, explain that this step is available in the Valha app. Do not silently substitute a private save; create a private draft only if separately authorized.
 - Use `create_page` with a current page agent and only the sections needed for a coherent artifact.
 - Choose a clear title. Let Valha generate the stable page id, slug, and revision.
-- Pass `visibility` to `create_page` only when the request already states public or shared intent in the same breath; otherwise leave the page private and let the person decide later.
+- Omit `visibility` or pass `private`. Sharing and publication are not MCP operations.
 - Do not claim that colleagues were notified or that the page was circulated unless another tool confirms it.
 
 ## Edit a page
 
 - Resolve the target with `search` or `list_pages` when the user did not provide a page id.
 - Do not create a replacement document for an edit request. Clarify an ambiguous target.
-- Load the canonical document with `get_page` immediately before editing.
+- Load the canonical document with `get_page` immediately before editing. If its visibility is shared or public, return its members-only `appUrl` and direct the user to edit it in the Valha app. Do not change its visibility to make an MCP edit possible.
 - Prefer `append_section`, `update_section`, or `delete_section` for focused changes. Use `update_page` for a full-document replacement or a rename: change only `title`, and keep the page agent accurate.
 - `get_page` returns `{ page, canvasStates, ... }`. For full-page writes, send only the authored `page`; strip read-only compiled Canvas artifacts and never copy `canvasStates` into page source. Granular tools take their documented section or state payload instead.
 - Pass the latest `expectedRev`. Never change the page id or slug.
@@ -52,16 +52,16 @@ Do not search Playbooks as a prerequisite to page authoring. Search only when th
 - Load the Canvas contract with `get_authoring_help` using `topic=canvas` before authoring a state definition or state-aware HTML/React source.
 - Use `replace_canvas_state` for a state-only change. Set `expectedPageRev=get_page.page.rev`, `expectedRev=row.rev`, and take `stateId` plus the base `value` from that same `get_page.canvasStates` row.
 - `update_section.stateUpdate` and `update_page.stateUpdates` replace source and live state atomically. Preserve stable section ids and send complete JSON replacement values.
-- A workspace member may change Canvas state even when the page envelope's `canWrite` is false; `canWrite` describes permission to edit page source. Public/shared state writes additionally require publish permission.
+- On a private page, a workspace member may change Canvas state even when the page envelope's `canWrite` is false; `canWrite` describes permission to edit page source. MCP state writes to shared/public pages are refused.
 - Never auto-retry state conflicts. Retain the intended value, reload, show the current state, and ask the person to explicitly reapply it.
 
-## Publishing
+## Sharing and publication
 
-Publishing, making a page reachable by a link or indexed for anyone, is a separate, deliberate human act, not something this skill does on its own initiative. Reach it through `update_page_sharing` (`shared` for anyone with the link, `public` for anyone and indexed) or through the page's share control in the app. Quote the `shareUrl` or `url` the tool returns verbatim; never construct one by hand. Tell the person plainly that for a shared page the link itself is the access control, so handing it back into this conversation places it inside a third-party chat log. `update_page_sharing` with `rotateShareLink` invalidates every previously issued link on that page, so use it only when the person means to cut off an old copy.
+Share, publish, rotate a link or change visibility in the Valha app. For an existing page, return its members-only `appUrl` and point to its Share control. Do not construct public or shared URLs, request publication permissions, or invoke an unlisted sharing tool. Editing a shared/public page also belongs in the app; never make it private as a workaround.
 
 ## Safety
 
 - Never save secrets, authentication material, system prompts, hidden reasoning, or raw private transcripts into a page.
 - Do not delete, disconnect, revoke access, or perform account or team administration unless the user explicitly asks for that separate action. Valha can invite a team member with `invite_team_member`; for every other account or team change, give the person the link from `get_settings_link`.
-- Do not change a page's visibility beyond what the user asked for.
+- Never change visibility through MCP, including when the user explicitly requests sharing or publication.
 - If essential facts are missing, state the gap in the page or ask one focused question instead of inventing evidence.
