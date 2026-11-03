@@ -46,8 +46,8 @@
             {
               "description": "Retrieve grounded knowledge from a seeded reviewer page.",
               "prompt": "In the Valha workspace 'Personal space', find the page titled 'Reviewer sample: renewal decision'. What decision does it record, and what source supports it?",
-              "tools_triggered": "get_context, search, fetch",
-              "expected_behavior": "Requires a reviewer workspace seeded with a private page titled 'Reviewer sample: renewal decision' whose decision and source are present in page content. Returns that decision, its source, and a link to the fetched page without inventing facts."
+              "tools_triggered": "get_context, list_pages, get_page",
+              "expected_behavior": "Requires Personal space to contain a private page titled 'Reviewer sample: renewal decision' whose decision and source are present in page content. Resolves that workspace with get_context, lists only its pages using workspaceId, then reads the matching page with get_page. Returns the decision, its source, and the page link without searching unrelated workspaces or inventing facts."
             },
             {
               "description": "Create and illustrate a private reviewer page.",
