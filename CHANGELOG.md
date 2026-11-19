@@ -2,6 +2,11 @@
 
 All notable public beta plugin contract changes are documented here.
 
+## 0.6.2 (2026-11-19)
+
+- Edit the content, illustrations, or Canvas state of a page shared by link.
+  Readers see the updates through the existing share link.
+
 ## 0.6.1 (2026-11-03)
 
 - MCP page authoring is private-only. Sharing, publication, link rotation and edits to shared/public pages are available in the Valha app; `update_page_sharing` is removed. Private-page inputs and Canvas encodings are preserved. Team settings and invitations keep their separate admin consent.

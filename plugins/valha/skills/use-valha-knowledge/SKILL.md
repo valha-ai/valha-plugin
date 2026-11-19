@@ -21,7 +21,7 @@ Use retrieval when the user asks for Valha knowledge or the task reasonably conc
 ## Continue existing work
 
 - Use `get_page` when the user needs the full canonical page. When the user intends to continue a specific artifact and write the result back to it, load it the same way and pass the continuation prompt's `edit` when it supplies one.
-- Do not mutate the page during a retrieval task. For a separately requested private-page edit, follow `save-valha-work`, which saves continuations with `update_page`. Sharing, publication and edits to shared/public pages are performed in the Valha app.
+- Keep a retrieval task read-only. For a separately requested edit, follow `save-valha-work`, which saves continuations with `update_page`.
 - Prefer the page's current content and provenance over recollection from an earlier conversation.
 
 ## Workspace and access rules

@@ -1,14 +1,14 @@
 # Valha
 
-Create and edit private Valha pages, reuse trusted knowledge, and find
+Save work to Valha, reuse trusted knowledge, and find
 Playbooks when requested. The plugin connects to the hosted Valha MCP server at
 `https://valha.ai/mcp`.
 
 ## What it does
 
 - **Save work:** when you ask, turns the useful outcome of a conversation into a
-  private Valha page, or updates an existing private page. Share, publish or edit
-  shared/public pages in the Valha app.
+  private Valha page, or updates a private page or one shared by link. Share,
+  publish, or edit public pages in the Valha app.
 - **Use knowledge:** offers the pages your Valha account can read as an optional
   source when relevant to your request, and cites the ones used. It does not
   require a search when the current context is sufficient or another source is

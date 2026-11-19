@@ -1,6 +1,6 @@
 {
   "name": "valha",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Create and edit private Valha pages, reuse trusted knowledge, and find Playbooks when requested.",
   "author": {
     "name": "Valha",
@@ -99,7 +99,7 @@
       },
       "publication": {
         "countries": [],
-        "release_notes": "Valha 0.6.1 renames Blueprints to Playbooks and keeps knowledge lookup optional and task-scoped. MCP page authoring now creates, edits and organizes private pages only; sharing, publication and edits to shared/public pages are available in the Valha app. The sharing tool is removed, and previous publish grants do not bypass the private-page boundary. Existing private-page inputs and Canvas encodings remain supported. Team settings and invitations retain their separate admin consent. The listing uses Documents for people and AI and the approved Claude description.",
+        "release_notes": "Valha 0.6.2 supports editing pages shared by link, including their sections, illustrations, and Canvas state. Readers see updates through the existing share link. Share, publish, and edit public pages in the Valha app.",
         "translations": {
           "fr-FR": {
             "description": "Transformez les résultats utiles de vos travaux avec l’IA en pages Valha claires, faciles à lire et à réutiliser. Retrouvez des connaissances fiables dans les pages auxquelles vous avez accès. Quand vous demandez un Playbook Valha, consultez cette méthode réutilisable et appliquez-la seulement après l’avoir choisie. Vous décidez quand créer et partager une page."

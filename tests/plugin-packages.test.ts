@@ -117,7 +117,7 @@ test("released Playbook and save guidance remains deliberate", () => {
   expect(save).toContain("does not authorize page creation or publication");
 });
 
-test("private-page guidance retires MCP sharing without a silent private substitute", () => {
+test("save guidance supports link-shared edits and keeps sharing in the app", () => {
   const save = read(production, "skills/save-valha-work/SKILL.md");
   const knowledge = read(production, "skills/use-valha-knowledge/SKILL.md");
   const playbooks = read(production, "skills/use-valha-playbooks/SKILL.md");
@@ -125,10 +125,14 @@ test("private-page guidance retires MCP sharing without a silent private substit
   for (const guidance of [save, knowledge, playbooks]) {
     expect(guidance).not.toContain("update_page_sharing");
     expect(guidance).not.toContain("valha:publish");
-    expect(guidance).toContain("Valha app");
   }
+  expect(save).toContain("Share, publish, rotate a link or change visibility in the Valha app");
   expect(save).toContain("Do not silently substitute a private save");
-  expect(save).toContain("MCP state writes to shared/public pages are refused");
+  expect(save).toContain("Private pages and pages shared by link support MCP content edits");
+  expect(save).toContain("every workspace role except reader can change Canvas state");
+  expect(save).toContain(
+    "If its audience broadened beyond the request, pause for the user's direction before retrying",
+  );
   expect(save).toContain("invite_team_member");
   expect(codex.description).toContain("private Valha pages");
   const positive = codex.extensions["com.openai"].review.test_cases.positive;
